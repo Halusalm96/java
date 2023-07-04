@@ -44,17 +44,14 @@ public class Sungjuk {
 			String set = sc.nextLine();
 			for (ScoruVO vo : array) {
 				if (set.equals(vo.getNo())) {
-					vo.setTot(vo.getKor()+vo.getMat()+vo.getEng());
-					vo.setAvg(vo.getTot()/3);
-					vo.setGrade(getGrade(vo.getAvg()));
 					vo.print_port();
 					find2 = true;
+					System.out.println("조회 완료");
 				}
 			}
 			if (!find) {
 				System.out.println("없음");
 			}
-
 			break;
 		case "3" :
 			System.out.println("학번\t이름\t국어\t수학\t영어\t총점\t평균\t학점");
@@ -143,7 +140,15 @@ public class Sungjuk {
 		return grade;
 	}
 	// 검색하기
-	public static ScoruVo search(String name) {
-		ScoruVo vo = new ScovuVO();
+	public static ScoruVO search(List<ScoruVO> array, String name) {
+		ScoruVO vo = new ScoruVO();
+		for (ScoruVO v : array) {
+			if (v.getName().equals(name)) {
+				v.setTot(v.getKor()+v.getMat()+v.getEng());
+				v.setAvg(v.getTot()/3);
+				vo = v;
+			}
+		}
+		return vo;
 	}
 }
